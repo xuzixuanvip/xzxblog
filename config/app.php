@@ -10,10 +10,9 @@ return [
     | This value is the name of your application. This value is used when the
     | framework needs to place the application's name in a notification or
     | any other location as required by the application or its packages.
-    |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APPLICATION_NAME') ?: '持剑的市井之徒',
 
     /*
     |--------------------------------------------------------------------------
@@ -22,7 +21,7 @@ return [
     |
     | This value determines the "environment" your application is currently
     | running in. This may determine how you prefer to configure various
-    | services the application utilizes. Set this in your ".env" file.
+    | services your application utilizes. Set this in your ".env" file.
     |
     */
 
@@ -52,9 +51,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
-
-    'asset_url' => env('ASSET_URL', null),
+    'url' => env('APP_URL', 'http://pigjian.app'),
 
     /*
     |--------------------------------------------------------------------------
@@ -67,7 +64,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => env('TIMEZONE') ?: 'PRC',
 
     /*
     |--------------------------------------------------------------------------
@@ -80,7 +77,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => env('LOCALE') ?: 'zh_cn',
 
     /*
     |--------------------------------------------------------------------------
@@ -93,20 +90,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
-
-    /*
-    |--------------------------------------------------------------------------
-    | Faker Locale
-    |--------------------------------------------------------------------------
-    |
-    | This locale will be used by the Faker PHP library when generating fake
-    | data for your database seeds. For example, this will be used to get
-    | localized telephone numbers, street address information and more.
-    |
-    */
-
-    'faker_locale' => 'en_US',
+    'fallback_locale' => 'zh_cn',
 
     /*
     |--------------------------------------------------------------------------
@@ -122,6 +106,23 @@ return [
     'key' => env('APP_KEY'),
 
     'cipher' => 'AES-256-CBC',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Logging Configuration
+    |--------------------------------------------------------------------------
+    |
+    | Here you may configure the log settings for your application. Out of
+    | the box, Laravel uses the Monolog PHP logging library. This gives
+    | you a variety of powerful log handlers / formatters to utilize.
+    |
+    | Available Settings: "single", "daily", "syslog", "errorlog"
+    |
+    */
+
+    'log' => env('APP_LOG', 'single'),
+
+    'log_level' => env('APP_LOG_LEVEL', 'debug'),
 
     /*
     |--------------------------------------------------------------------------
@@ -165,6 +166,13 @@ return [
         /*
          * Package Service Providers...
          */
+        Laravel\Passport\PassportServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
+        JellyBool\Translug\TranslugServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
+        Laravel\Tinker\TinkerServiceProvider::class,
+        Jcc\LaravelVote\VoteServiceProvider::class,
+        JellyBool\Flysystem\Upyun\UpyunServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -223,7 +231,9 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'Translug' => JellyBool\Translug\TranslugFacade::class,
+        'Image' => Intervention\Image\Facades\Image::class,
     ],
 
 ];
